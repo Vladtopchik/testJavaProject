@@ -20,8 +20,6 @@ public class User {
     private long id;
 
     @NonNull
-    @Lob
-    @JdbcTypeCode(Types.LONGNVARCHAR)
     @Column(name = "username", unique = true, nullable = false, columnDefinition = "TEXT")
     private String username;
 
