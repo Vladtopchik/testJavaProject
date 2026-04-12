@@ -12,8 +12,15 @@
     <form method="post" action="">
         <input name="name" id="name" type="text">
         <label for="name">Note name</label><br>
+        <textarea name="description" id="description"></textarea>
+        <label for="description">Description:</label>
         <button type="submit">add</button>
     </form>
+
+    <div th:each="note : ${notes}">
+        <h1 th:text="${note.name}">Name</h1>
+        <span th:text="${note.description}">Description</span>
+    </div>
     <script th:src="@{/js/index.js}"></script>
 </body>
 </html>
