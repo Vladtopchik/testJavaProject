@@ -13,6 +13,6 @@ public class HelloController {
 
     @PostMapping("/")
     public String handleIndex() {
-
+        return "index";
     }
 }
