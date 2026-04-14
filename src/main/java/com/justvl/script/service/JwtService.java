@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import javax.security.auth.Subject;
 import java.util.Date;
 
 @Service
@@ -33,7 +34,7 @@ public class JwtService {
 
     public String generateToken(long userId, String username) {
         return Jwts.builder()
-                .claim("sub", userId)
+                .subject(String.valueOf(userId))
                 .claim("username", username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + lifetime))
@@ -49,9 +50,9 @@ public class JwtService {
                 .getPayload();
 
         return new UserData(
-                claims.get("id", Long.class),
-                claims.get("username", String.class
-        ));
+                Long.parseLong(claims.getSubject()),
+                claims.get("username", String.class)
+        );
     }
 
     private SecretKey getSingKey() {
