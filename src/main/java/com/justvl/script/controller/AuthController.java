@@ -25,6 +25,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public String viewRegister(@ModelAttribute RegisterForm registerForm) {
+//        System.out.println(registerForm.getUsername());
+//        System.out.println(registerForm.getPassword());
+//        System.out.println(registerForm.getRemember());
         userService.createUser(registerForm.getUsername(), registerForm.getPassword());
         return "redirect:/";
     }
