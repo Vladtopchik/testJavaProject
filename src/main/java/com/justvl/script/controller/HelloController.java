@@ -19,7 +19,9 @@ public class HelloController {
     public String viewIndex(Model model, Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
             model.addAttribute("username", authentication.getName());
-        }
+            model.addAttribute("authenticated", true);
+        } else model.addAttribute("authenticated", false);
+
 
         model.addAttribute("notes", noteService.getAllNotes());
         return "index";

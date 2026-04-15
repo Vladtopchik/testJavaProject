@@ -11,9 +11,10 @@
     <a th:href="@{/login}">Login</a>
     <a th:href="@{/register}">Register</a>
 
-    <h3 th:text="${username} ?: 'Bro ther'">Username</h3>
+    <h3>Hello <span th:text="${username}">Guest</span>!!!</h3>
 
-    <p>Add note</p>
+
+    <p th:text="${authenticated} ? 'Add note' : 'Register to add a/the note'">Add note</p>
     <form method="post" action="">
         <input name="name" id="name" type="text">
         <label for="name">Note name</label><br>
