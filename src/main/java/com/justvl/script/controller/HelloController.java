@@ -3,6 +3,7 @@ package com.justvl.script.controller;
 import com.justvl.script.dto.NoteForm;
 import com.justvl.script.service.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,11 @@ public class HelloController {
     private final NoteService noteService;
 
     @GetMapping("/")
-    public String viewIndex(Model model) {
+    public String viewIndex(Model model, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            model.addAttribute("username", authentication.getName());
+        }
+
         model.addAttribute("notes", noteService.getAllNotes());
         return "index";
     }

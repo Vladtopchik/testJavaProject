@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import javax.security.auth.Subject;
 import java.util.Date;
 
 @Service
@@ -53,6 +52,10 @@ public class JwtService {
                 Long.parseLong(claims.getSubject()),
                 claims.get("username", String.class)
         );
+    }
+
+    public String parseUsername(String token) {
+        return extractData(token).getUsername();
     }
 
     private SecretKey getSingKey() {
