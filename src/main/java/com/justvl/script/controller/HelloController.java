@@ -28,8 +28,11 @@ public class HelloController {
     }
 
     @PostMapping("/")
-    public String handleIndex(@ModelAttribute NoteForm noteData) {
-        noteService.saveNote(noteData);
+    public String handleIndex(@ModelAttribute NoteForm noteData, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            noteService.saveNote(noteData, authentication.getName());
+        } else noteService.saveNote(noteData);
+
         return "redirect:/";
     }
 }

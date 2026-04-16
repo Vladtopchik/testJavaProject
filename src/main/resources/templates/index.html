@@ -11,11 +11,11 @@
     <a th:href="@{/login}">Login</a>
     <a th:href="@{/register}">Register</a>
 
-    <h3>Hello <span th:text="${username}">Guest</span>!!!</h3>
+    <h3>Hello <span th:text="${username} ?: 'Guest'">Guest</span>!!!</h3>
 
 
-    <p th:text="${authenticated} ? 'Add note' : 'Register to add a/the note'">Add note</p>
-    <form method="post" action="">
+    <p th:text="${authenticated} ? 'Add a note' : 'Register to add a note'">Register</p>
+    <form th:if="${authenticated}" method="post" action="">
         <input name="name" id="name" type="text">
         <label for="name">Note name</label><br>
         <textarea name="description" id="description"></textarea>
@@ -24,7 +24,9 @@
     </form>
 
     <div th:each="note : ${notes}">
+        <hr>
         <h1 th:text="${note.name}">Name</h1>
+        <h4>Author: <span th:text="${note.author}"></span></h4>
         <span th:text="${note.description}">Description</span>
     </div>
     <script th:src="@{/js/index.js}"></script>

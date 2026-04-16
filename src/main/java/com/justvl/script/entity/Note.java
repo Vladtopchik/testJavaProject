@@ -18,6 +18,11 @@ public class Note {
     private String name;
 
     @NonNull
+    @Setter
+    @Column(name = "author", nullable = false, columnDefinition = "varchar(255) default 'Anonymous'")
+    private String author = "Anonymous";
+
+    @NonNull
     @Column(name = "description", nullable = false)
     private String description;
 }
